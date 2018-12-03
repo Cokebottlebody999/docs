@@ -5925,8 +5925,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-your-ios-app-for-100-match" title="Configuring Your iOS App for 100% Match" class="md-nav__link">
-    Configuring Your iOS App for 100% Match
+  <a href="#configuring-your-ios-app-for-100-match-ios-10-only" title="Configuring Your iOS App for 100% Match ( &gt; iOS 10 only)" class="md-nav__link">
+    Configuring Your iOS App for 100% Match ( &gt; iOS 10 only)
   </a>
   
     <nav class="md-nav">
@@ -6145,8 +6145,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-your-ios-app-for-100-match" title="Configuring Your iOS App for 100% Match" class="md-nav__link">
-    Configuring Your iOS App for 100% Match
+  <a href="#configuring-your-ios-app-for-100-match-ios-10-only" title="Configuring Your iOS App for 100% Match ( &gt; iOS 10 only)" class="md-nav__link">
+    Configuring Your iOS App for 100% Match ( &gt; iOS 10 only)
   </a>
   
     <nav class="md-nav">
@@ -6273,8 +6273,11 @@
 <p><img alt="image" src="../../../img/pages/resources/matching/match_type.png" /></p>
 <p>This means that if two users with the same snapshot, on the same wifi, were to click a Branch link for your app, we would blacklist those digital snapshots for the expiration duration. Therefore, when either user opens up your app, no match would be made.</p>
 </div>
-<h2 id="configuring-your-ios-app-for-100-match">Configuring Your iOS App for 100% Match<a class="headerlink" href="#configuring-your-ios-app-for-100-match" title="Permanent link">&para;</a></h2>
+<h2 id="configuring-your-ios-app-for-100-match-ios-10-only">Configuring Your iOS App for 100% Match ( &gt; iOS 10 only)<a class="headerlink" href="#configuring-your-ios-app-for-100-match-ios-10-only" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Applies only to iOS 10 and below</p>
 <p>100% match is a bit of a misnomer, as it is only 100% match from when a user clicks from the Safari browser. According to our analysis, clicking through Safari happens about 50-75% of the time depending on the use case. For example, clicking from Facebook or Chrome won't trigger a 100% match here. However, it's still beneficial to the matching accuracy, so we recommend employing it.</p>
+</div>
 <h3 id="include-safariservicesframework">Include SafariServices.framework<a class="headerlink" href="#include-safariservicesframework" title="Permanent link">&para;</a></h3>
 <p>First off, you'll need to include the <code>SafariServices.framework</code> into your app to leverage this. Currently, as soon as you add the Framework, Branch will start triggering the Safari-based 100% match technique. To add the framework, simply go to your Xcode project:</p>
 <ul>
