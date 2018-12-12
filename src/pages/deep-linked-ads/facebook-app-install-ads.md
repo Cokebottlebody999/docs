@@ -57,6 +57,48 @@ App Installs | ✔︎ | ✔︎ | ✔︎ | ✔︎ | - | - | ✔︎
 !!! note "Optional: Deep Link Data"
 	You can use this configuration section to specify custom link parameters that will be deep linked into the app after install. These could include a coupon code or a page identifier to route the user. Visit the [Deep Link Routing](/pages/deep-linking/routing/) page to learn more.
 
+#### Setup Deferred Deep linking for Facebook App Install Ads
+Once you have created the Branch link, you need to make a few changes in the app to ensure the deep link data from Facebook Ads is passing at the time of app install as following:
+	
+- **Android:**
+	- [Integrate the Facebook SDK](https://developers.facebook.com/docs/android/getting-started) if you haven't done so already.
+	- Ensure that the _facebook_app_id_ string resource in strings.xml. The id should not be prefixed with "fb". 
+	- If you are using ProGuard, add rules for [Facebook SDK](https://github.com/BranchMetrics/android-branch-deep-linking#proguard-settings-for-leveraging-branchs-pooled-matching).
+	- Call `enableFacebookAppLinkCheck();` on your Branch instance right after calling `getAutoInstance();` as below:
+	```java
+	public class CustomApplicationClass extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        
+		Branch.getAutoInstance(this);
+		Branch.getInstance().enableFacebookAppLinkCheck();
+	  }
+	}
+	```
+- **iOS:**
+	- [Integrate the Facebook SDK](https://developers.facebook.com/docs/ios/getting-started)  if you haven't done so already.
+	- Call  `registerFacebookDeepLinkingClass(FBSDKAppLinkUtility.self)`  on your  `Branch`instance just before calling `initSession()` it as below:
+
+
+    - *Swift 3*
+    
+	```swift
+	Branch.getInstance().registerFacebookDeepLinkingClass(FBSDKAppLinkUtility.self)
+	Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in 
+		// do stuff with deep link data (nav to page, display content, etc) 
+		print(params as? [String: AnyObject] ?? {}) 
+	} 
+	```
+
+    - *Objective-C*
+    
+	```objc
+	Branch *branch = [Branch getInstance];
+	[branch registerFacebookDeepLinkingClass:[FBSDKAppLinkUtility class]];
+	```
+
+
 #### Configure an Ad
 
 To set up a Facebook App Install campaign, you will need to first create your campaign and use a Branch link as the Deep Link URL for the advertisements. Facebook App Install Campaign information is available **[here](https://www.facebook.com/business/ads-guide/app-installs){:target="_blank"}**.
