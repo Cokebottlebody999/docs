@@ -59,45 +59,52 @@ App Installs | ✔︎ | ✔︎ | ✔︎ | ✔︎ | - | - | ✔︎
 
 #### Setup Deferred Deep linking for Facebook App Install Ads
 Once you have created the Branch link, you need to make a few changes in the app to ensure the deep link data from Facebook Ads is passing at the time of app install as following:
-	
-- **Android:**
-	- [Integrate the Facebook SDK](https://developers.facebook.com/docs/android/getting-started) if you haven't done so already.
-	- Ensure that the _facebook_app_id_ string resource in strings.xml. The id should not be prefixed with "fb". 
+ - **Android:**
+
+ 	- [Integrate the Facebook SDK](https://developers.facebook.com/docs/android/getting-started) if you haven't done so already.
+
+	- Ensure that the _facebook_app_id_ string resource in strings.xml. The id should not be prefixed with "fb".
+
 	- If you are using ProGuard, add rules for [Facebook SDK](https://github.com/BranchMetrics/android-branch-deep-linking#proguard-settings-for-leveraging-branchs-pooled-matching).
+
 	- Call `enableFacebookAppLinkCheck();` on your Branch instance right after calling `getAutoInstance();` as below:
-	```java
-	public class CustomApplicationClass extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        
-		Branch.getAutoInstance(this);
-		Branch.getInstance().enableFacebookAppLinkCheck();
-	  }
-	}
-	```
-- **iOS:**
-	- [Integrate the Facebook SDK](https://developers.facebook.com/docs/ios/getting-started)  if you haven't done so already.
+
+    ```java
+    public class CustomApplicationClass extends Application {
+    	@Override
+    	public void onCreate() {
+    		super.onCreate();
+
+    		Branch.getAutoInstance(this);
+    		Branch.getInstance().enableFacebookAppLinkCheck();
+    	}
+    }
+    ```
+
+
+ - **iOS:**
+
+ 	- [Integrate the Facebook SDK](https://developers.facebook.com/docs/ios/getting-started)  if you haven't done so already.
+
 	- Call  `registerFacebookDeepLinkingClass(FBSDKAppLinkUtility.self)`  on your  `Branch`instance just before calling `initSession()` it as below:
 
 
-    - *Swift 3*
-    
-	```swift
-	Branch.getInstance().registerFacebookDeepLinkingClass(FBSDKAppLinkUtility.self)
-	Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in 
-		// do stuff with deep link data (nav to page, display content, etc) 
-		print(params as? [String: AnyObject] ?? {}) 
-	} 
-	```
+	- *Swift 3*
 
-    - *Objective-C*
-    
-	```objc
-	Branch *branch = [Branch getInstance];
-	[branch registerFacebookDeepLinkingClass:[FBSDKAppLinkUtility class]];
-	```
+	    ```swift
+	    Branch.getInstance().registerFacebookDeepLinkingClass(FBSDKAppLinkUtility.self)
+	    Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+	    	// do stuff with deep link data (nav to page, display content, etc)
+	    	print(params as? [String: AnyObject] ?? {})
+	    }
+	    ```
 
+	- *Objective-C*
+	    
+	    ```objc
+	    Branch *branch = [Branch getInstance];
+	    [branch registerFacebookDeepLinkingClass:[FBSDKAppLinkUtility class]];
+	    ```
 
 #### Configure an Ad
 
