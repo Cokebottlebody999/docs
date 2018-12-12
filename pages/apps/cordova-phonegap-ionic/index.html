@@ -7195,49 +7195,34 @@
 </li>
 <li>
 <p>Validate with the <a href="https://dashboard.branch.io/liveview/commerce">Branch Dashboard</a></p>
-<div class="codehilite"><pre><span></span><span class="c1">// only revenue is required</span>
-<span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;revenue&#39;</span><span class="o">:</span> <span class="mf">50.29</span><span class="p">,</span>
-  <span class="s1">&#39;currency&#39;</span><span class="o">:</span> <span class="mi">148</span><span class="p">,</span> <span class="c1">// USD</span>
-  <span class="s1">&#39;transactionID&#39;</span><span class="o">:</span> <span class="s1">&#39;transaction id&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;coupon&#39;</span><span class="o">:</span> <span class="s1">&#39;coupon&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;shipping&#39;</span><span class="o">:</span> <span class="mf">2.22</span><span class="p">,</span>
-  <span class="s1">&#39;tax&#39;</span><span class="o">:</span> <span class="mf">5.11</span><span class="p">,</span>
-  <span class="s1">&#39;affiliation&#39;</span><span class="o">:</span> <span class="s1">&#39;affiliation&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;products&#39;</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s1">&#39;sku&#39;</span><span class="o">:</span> <span class="s1">&#39;u123&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;cactus&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.99</span><span class="p">,</span>
-      <span class="s1">&#39;quantity&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s1">&#39;brand&#39;</span><span class="o">:</span> <span class="s1">&#39;brand&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;category&#39;</span><span class="o">:</span> <span class="mi">17</span><span class="p">,</span> <span class="c1">// Software</span>
-      <span class="s1">&#39;variant&#39;</span><span class="o">:</span> <span class="s1">&#39;variant&#39;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s1">&#39;sku&#39;</span><span class="o">:</span> <span class="s1">&#39;u456&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;grass&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">0.00</span><span class="p">,</span>
-      <span class="s1">&#39;quantity&#39;</span><span class="o">:</span> <span class="mi">1</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-
-<span class="c1">// optional fields</span>
-<span class="kd">var</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;custom_dictionary&#39;</span><span class="o">:</span> <span class="mi">123</span><span class="p">,</span>
-  <span class="s1">&#39;anything&#39;</span><span class="o">:</span> <span class="s1">&#39;everything&#39;</span>
-<span class="p">}</span>
-
-<span class="nx">Branch</span><span class="p">.</span><span class="nx">sendCommerceEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Response: &#39;</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">res</span><span class="p">))</span>
-<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Error: &#39;</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">))</span>
-<span class="p">})</span>
-</pre></div>
-
+<p><code>js
+// only revenue is required
+Branch.getStandardEvents().then(function success(res) {
+      var event = res.STANDARD_EVENT_ADD_TO_CART;
+       var metadata = {
+transactionID: '12344555',
+currency: 'USD',
+revenue: 1.5,
+shipping: 10.2,
+tax: 12.3,
+coupon: 'test_coupon',
+affiliation: 'test_affiliation',
+description: 'Test add to cart event',
+searchQuery: 'test keyword',
+customData: {
+  "Custom_Event_Property_Key1": "Custom_Event_Property_val1",
+  "Custom_Event_Property_Key2": "Custom_Event_Property_val2"
+}
+      };
+      Branch.sendBranchEvent(event, metadata).then(function success(res) {
+alert("Branch Event success " + res);
+      }).catch(function error(err) {
+alert("Branch Event " + err);
+      });
+    }).catch(function error(err) {
+      alert("Get Standard Event " + err);
+    });
+  }</code></p>
 </li>
 </ul>
 </li>
