@@ -7195,35 +7195,35 @@
 </li>
 <li>
 <p>Validate with the <a href="https://dashboard.branch.io/liveview/commerce">Branch Dashboard</a></p>
+<div class="codehilite"><pre><span></span><span class="nx">Branch</span><span class="p">.</span><span class="nx">getStandardEvents</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="nx">success</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">STANDARD_EVENT_ADD_TO_CART</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">transactionID</span><span class="o">:</span> <span class="s1">&#39;1234455&#39;</span><span class="p">,</span>
+        <span class="nx">currency</span><span class="o">:</span> <span class="s1">&#39;USD&#39;</span><span class="p">,</span>
+        <span class="nx">revenue</span><span class="o">:</span> <span class="mf">1.5</span><span class="p">,</span>
+        <span class="nx">shipping</span><span class="o">:</span> <span class="mf">10.2</span><span class="p">,</span>
+        <span class="nx">tax</span><span class="o">:</span> <span class="mf">12.3</span><span class="p">,</span>
+        <span class="nx">coupon</span><span class="o">:</span> <span class="s1">&#39;test_coupon&#39;</span><span class="p">,</span>
+        <span class="nx">affiliation</span><span class="o">:</span> <span class="s1">&#39;test_affiliation&#39;</span><span class="p">,</span>
+        <span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;Test add to cart event&#39;</span><span class="p">,</span>
+        <span class="nx">searchQuery</span><span class="o">:</span> <span class="s1">&#39;test keyword&#39;</span><span class="p">,</span>
+        <span class="nx">customData</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;Custom_Event_Property_Key1&quot;</span><span class="o">:</span> <span class="s2">&quot;Custom_Event_Property_val1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Custom_Event_Property_Key2&quot;</span><span class="o">:</span> <span class="s2">&quot;Custom_Event_Property_val2&quot;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="nx">Branch</span><span class="p">.</span><span class="nx">sendBranchEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="nx">success</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Branch Event success &quot;</span> <span class="o">+</span> <span class="nx">res</span><span class="p">);</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Branch Event &quot;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Get Standard Event &quot;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
 </li>
 </ul>
-<p><code>js
-    Branch.getStandardEvents().then(function success(res) {
-        var event = res.STANDARD_EVENT_ADD_TO_CART;
-        var metadata = {
-            transactionID: '12344555',
-            currency: 'USD',
-            revenue: 1.5,
-            shipping: 10.2,
-            tax: 12.3,
-            coupon: 'test_coupon',
-            affiliation: 'test_affiliation',
-            description: 'Test add to cart event',
-            searchQuery: 'test keyword',
-            customData: {
-                "Custom_Event_Property_Key1": "Custom_Event_Property_val1",
-                "Custom_Event_Property_Key2": "Custom_Event_Property_val2"
-            }
-        };
-        Branch.sendBranchEvent(event, metadata).then(function success(res) {
-            alert("Branch Event success " + res);
-        }).catch(function error(err) {
-            alert("Branch Event " + err);
-        });
-    }).catch(function error(err) {
-        alert("Get Standard Event " + err);
-    });
-    }</code></p>
 </li>
 <li>
 <h3 id="handle-referrals">Handle referrals<a class="headerlink" href="#handle-referrals" title="Permanent link">&para;</a></h3>
