@@ -6159,22 +6159,31 @@
 </div>
 </li>
 <li>
-<p><strong>Campaign ID</strong> (<em>~campaign_id</em> in link data). Campaign ID is required to avoid duplicating clicks. More on this in the troubleshooting section. For Google, the Campaign ID can be dynamically filled in using the <code>{campaignid}</code> ValueTrack Parameter <em>~campaign_id={campaignid}</em>. For Facebook, unfortunately the Campaign ID must be manually identified and added.</p>
-<p>Facebook: Find the campaign you want to track:
-<img alt="image" src="../../../img/pages/deep-linked-ads/san-web-tracking/fb-edit-campaign.png" /></p>
-<p>Facebook: Click edit, and you'll be able to capture the Campaign ID:
-<img alt="image" src="../../../img/pages/deep-linked-ads/san-web-tracking/fb-copy-campaign-id.png" /></p>
+<p><strong>Campaign ID</strong> (<em>~campaign_id</em> in link data). Campaign ID is required to avoid duplicating clicks. More on this in the troubleshooting section.</p>
+<div class="codehilite"><pre><span></span>1. For Google, the Campaign ID can be dynamically filled in using the `{campaignid}` ValueTrack Parameter *~campaign_id={campaignid}*.
+
+An example link for Google might look like this, where the campaign is set to the exact campaign name in link data (`&quot;~campaign&quot;:&quot;WL Web Traffic Campaign 10-23&quot;`) and the Campaign ID macro will be dynamically populated.
+</pre></div>
+
+
+<p><em><a href="https://branchster.app.link/An3S78aUa?%243p=a_google_adwords&amp;~campaign_id={campaignid">https://branchster.app.link/An3S78aUa?%243p=a_google_adwords&amp;~campaign_id={campaignid</a>}</em></p>
+<div class="codehilite"><pre><span></span><span class="x">For more information on available dynamic parameters for Google, please [Google&#39;s ValueTrack Parameter documentation](https://support.google.com/google-ads/answer/6305348).</span>
+
+<span class="x">1. For Facebook, the Campaign ID can by dynamically filled in using the `{campaign.id}` dynamic parameter.</span>
+
+<span class="x">An example link for Facebook might look like this, where the campaign is set to the exact campaign name in link data (`&quot;~campaign&quot;:&quot;WL Web Traffic Campaign 10-23&quot;`) and the Campaign ID macro will be dynamically populated.</span>
+<span class="x">  *https://branchster.app.link/M34SLszUZ1?%243p=a_facebook&amp;campaign_id=</span><span class="cp">{{</span><span class="nv">campaign.id</span><span class="cp">}}</span><span class="x">*</span>
+</pre></div>
+
+
+<p>For more information on available dynamic parameters for Facebook, please <a href="https://www.facebook.com/business/help/1016122818401732">Facebook's URL Parameters documentation</a>.</p>
 </li>
 </ol>
-<p>An example link for Facebook might look like this, where the campaign is set to the exact campaign name in link data (<code>"~campaign":"WL Web Traffic Campaign 10-23"</code>)
-<em><a href="https://branchster.app.link/M34SLszUZ1?%243p=a_facebook&amp;~campaign_id=23843010858510059">https://branchster.app.link/M34SLszUZ1?%243p=a_facebook&amp;~campaign_id=23843010858510059</a></em></p>
-<p>An example link for Google might look like this, where the campaign is set to the exact campaign name in link data (<code>"~campaign":"WL Web Traffic Campaign 10-23"</code>) and the Campaign ID macro will be dynamically populated.
-<em><a href="https://branchster.app.link/An3S78aUa?%243p=a_google_adwords&amp;~campaign_id={campaignid">https://branchster.app.link/An3S78aUa?%243p=a_google_adwords&amp;~campaign_id={campaignid</a>}</em></p>
 <p>As with all links, you don't have to use short links created through the dashboard, as long as you have long links with the relevant properties (<em>$3p</em>, <em>~feature=paid%20advertising</em>, <em>~campaign</em> etc.) then you can create long links dynamically.</p>
 </li>
 </ol>
 <h3 id="placing-links-in-campaigns">Placing links in campaigns<a class="headerlink" href="#placing-links-in-campaigns" title="Permanent link">&para;</a></h3>
-<p>As a general rule, links for Google campaigns will be placed in the <em>tracking template</em> field at the relevant level, and links for Facebook campaigns will be placed in the <em>Website URL</em> field. </p>
+<p>As a general rule, links for Google campaigns will be placed in the <em>tracking template</em> field at the relevant level, and links for Facebook campaigns will be placed in the <em>Website URL</em> field.</p>
 <p>If you're a Google expert, you may notice ways to scale the deployment of tracking links. For example, you can use the campaign-level tracking template field, and <a href="https://support.google.com/google-ads/answer/6325879">custom parameters</a> for ad-level macros. In all cases, as long as the right analytics tags are placed in the right locations, tracking will be maintained and full-funnel data will be visible in Branch.</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <p>If you follow the above steps, you shouldn't have any issues. However, if you miss a step you might see unexpected data. You should know that clicks, impressions and cost data can be ingested into the Branch dashboard via the reporting APIs provided by SANs, and <em>clicks</em> can also appear through the links you set up as described above. Branch therefore has two sources for clicks. This is because app campaigns (such as Google UACs or Facebook App Install campaigns) <em>do not</em> allow links and therefore we must ingest click data via API.</p>
